@@ -1,0 +1,50 @@
+{% extends "web/nav.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+#a:hover{
+  color: black;
+  background: rgba(255, 255, 255, 0.664);
+  box-shadow: 0 0 2px orange, 0 0 6px orange, 0 0 12px orange;
+  
+}
+</style>
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+          <p class="text-secondary">" {{ user.profile.user_description }} " </p>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profile Info</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+      </form>
+    </div>
+
+    <!--These are posts-->
+    {% for post in posts %}
+    <div class="myDonations" id="a">
+      <div class="media border p-3 mb-5 myDonations">
+        <img src="{{post.project_image}}" alt="John Doe" class="mr-3 mt-3 " style="width:400px;">
+        <div class="media-body">
+          <h4>{{post.projectname}} </h4>
+          <small><i>{{post.date | date:"F d, Y" }}</i></small>
+          <hr>
+          <p>{{post.project_desc}}</p><br>
+          <p>Rs. {{post.amount}} </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock content %}
+
