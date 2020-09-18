@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'users',
     'bootstrap',
     'fontawesome',
-    'crispy_forms',
+    'crispy_forms', 
 ]
 
 MIDDLEWARE = [
